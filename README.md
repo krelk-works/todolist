@@ -12,7 +12,7 @@ Autodetección de idioma (ES/EN).
 React + TypeScript + Vite + Tailwind
 
 ## Preview
-![Vista previa](https://raw.githubusercontent.com/krelk-works/todolist/main/public/image.png)
+![Vista previa](https://github.com/krelk-works/todolist/blob/7aaf41d6bb1a19ed2a400cc50c4db46af42affee/screenshots/image.png)
 
 ## Dev
 ```bash
