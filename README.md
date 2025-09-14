@@ -3,9 +3,13 @@
 To-do list enfocada en **deadlines** y **prioridades** para mantener el foco.
 Autodetección de idioma (ES/EN).
 
+## Test it online
+### 🌐 https://krelk.com/todolist
+
 ## Preview
 <p align="center">
   <img src="screenshots/image.png" alt="Preview" width="250"/>
+  <img src="screenshots/image2.png" alt="Preview" width="250"/>
 </p>
 
 ## Features
@@ -31,3 +35,6 @@ npx cap add android
 npx cap copy
 npx cap open android
 ```
+
+## Versión
+0.0.2
