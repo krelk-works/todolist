@@ -13,7 +13,7 @@ React + TypeScript + Vite + Tailwind
 
 ## Preview
 <p align="center">
-  <img src="screenshots/image.png" alt="Preview" width="600"/>
+  <img src="screenshots/image.png" alt="Preview" width="250"/>
 </p>
 
 ## Dev
