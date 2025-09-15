@@ -1,4 +1,4 @@
-/** 
+/**
  * Objeto de lista de tareas a emplear de forma genérica
  * {
  * id: number,

@@ -10,18 +10,22 @@ export const getClassNameForPriority = (priority: string) => {
         default:
             return '';
     }
-}
+};
 
 /** Recibe el tiempo en minutos y devuelve el porcentaje de tiempo restante */
-export const getPercentageToDeadline = (timeToEnd: number, timestamp: number) => {
+export const getPercentageToDeadline = (
+    timeToEnd: number,
+    timestamp: number
+) => {
     if (!timeToEnd) return 0;
     const secondsToDeadline = timeToEnd * 60;
     const secondsElapsed = (Date.now() - timestamp) / 1000;
-    const percentage = (secondsToDeadline - secondsElapsed) / secondsToDeadline * 100;
+    const percentage =
+        ((secondsToDeadline - secondsElapsed) / secondsToDeadline) * 100;
     // console.log(`Han transcurrido ${secondsElapsed} segundos de ${secondsToDeadline} segundos totales.`);
     // console.log('Obteniendo porcentaje deadline');
     return Math.min(Math.max(percentage, 0), 100);
-}
+};
 
 /** Devuelve la clase de Tailwind CSS para el color de fondo según el porcentaje */
 export const getBgColorForPercentage = (percentage: number) => {
@@ -38,4 +42,4 @@ export const getBgColorForPercentage = (percentage: number) => {
     } else {
         return 'bg-gray-600';
     }
-}
+};

@@ -1,4 +1,4 @@
-/** 
+/**
  * Objeto de deadline para emplear con las tareas
  * {
  * id: number,

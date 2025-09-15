@@ -4,29 +4,35 @@ To-do list enfocada en **deadlines** y **prioridades** para mantener el foco.
 Autodetección de idioma (ES/EN).
 
 ## Test it online
+
 ### 🌐 https://krelk.com/todolist
 
 ## Preview
+
 <p align="center">
   <img src="screenshots/image.png" alt="Preview" width="250"/>
   <img src="screenshots/image2.png" alt="Preview" width="250"/>
 </p>
 
 ## Features
+
 - Tareas con deadline ⏳
 - Prioridades (Alta/Media/Baja)
 - Traducción automática (ES/EN/IT/FR/PT/TR/RO/BG/DE)
 
 ## Stack
+
 React + TypeScript + Vite + Tailwind
 
 ## Dev
+
 ```bash
 npm i
 npm run dev
 ```
 
 ## Android APK
+
 ```bash
 npm i @capacitor/core @capacitor/cli
 npx cap init TODO-APP com.tuempresa.todo
@@ -37,4 +43,5 @@ npx cap open android
 ```
 
 ## Versión
+
 0.1.1
