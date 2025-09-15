@@ -1,27 +1,17 @@
 import React from 'react';
-// MUI Icons: https://mui.com/material-ui/material-icons/
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useTranslation } from 'react-i18next';
 import { getItems, saveItems } from '@/services/LocalStorage';
 import type { AddTaskPayload } from '@/types/AddModal';
-import type { Tarea } from '@/types/Tareas';
-import type { Translation } from '@/types/Translation';
-import { getTranslation } from '@/utils/translations';
+import type { Task } from '@/types/Task';
 import AddTaskModal from './AddTaskModal';
 
-// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
 export const Header = () => {
-    const [translations, setTranslations] = React.useState<Translation>();
     const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
-
-    React.useEffect(() => {
-        if (!translations) {
-            setTranslations(getTranslation());
-        }
-    }, []);
+    const { t } = useTranslation();
 
     const handleAddTask = (task: AddTaskPayload) => {
-        const newTask: Tarea = {
+        const newTask: Task = {
             id: Date.now(),
             name: task.title,
             done: false,
@@ -52,7 +42,7 @@ export const Header = () => {
                     }}
                 />
                 <h1 className='sm:font-size-xs md:text-2xl font-bold'>
-                    {translations?.appTitle}
+                    {t('appTitle')}
                 </h1>
                 <div>
                     <AddCircleIcon

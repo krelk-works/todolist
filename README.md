@@ -1,7 +1,7 @@
 # Todo List App
 
 To-do list enfocada en **deadlines** y **prioridades** para mantener el foco.
-Autodetección de idioma (ES/EN).
+Autodetección de idioma (ES/EN/IT/FR/PT/TR/RO/BG/DE).
 
 ## Test it online
 
@@ -44,4 +44,4 @@ npx cap open android
 
 ## Versión
 
-0.1.1
+0.1.3

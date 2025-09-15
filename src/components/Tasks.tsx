@@ -1,24 +1,21 @@
 import React from 'react';
 import CancelIcon from '@mui/icons-material/Cancel';
-// Iconos MUI
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import { useTranslation } from 'react-i18next';
 import { getItems, saveItems } from '@/services/LocalStorage';
-import type { Tarea } from '@/types/Tareas';
-import type { Translation } from '@/types/Translation';
+import type { Task } from '@/types/Task';
 import {
     getBgColorForPercentage,
     getClassNameForPriority,
     getPercentageToDeadline,
-} from '@/utils/taskscss';
-// Función para obtener las traducciones
-import { getTranslation } from '../utils/translations';
+} from '@/utils/tasks';
 import { Modal } from './Modal';
 
 export const Tasks = () => {
-    const [currentList, setCurrentList] = React.useState<Tarea[]>([]);
-    const [currentSortedList, setCurrentSortedList] = React.useState<Tarea[]>(
+    const [currentList, setCurrentList] = React.useState<Task[]>([]);
+    const [currentSortedList, setCurrentSortedList] = React.useState<Task[]>(
         []
     );
     // Modal de confirmación de completado o eliminación ---------------------------------
@@ -30,16 +27,11 @@ export const Tasks = () => {
     const [modalTaskId, setModalTaskId] = React.useState<number>(0);
     // -----------------------------------------------------------------------------------
     // Variables para la funcionalidad de traducción
-    const [translations, setTranslations] = React.useState<Translation>();
+    const { t } = useTranslation();
 
     // Cargar las tareas al montar el componente
     React.useEffect(() => {
         setCurrentList(getItems());
-
-        // Obtener las traducciones
-        if (!translations) {
-            setTranslations(getTranslation());
-        }
 
         // Loop para actualizar el progreso cada 5 segundos
         const interval = setInterval(() => {
@@ -88,7 +80,7 @@ export const Tasks = () => {
     const handleComplete = () => {
         // Si no hay tarea seleccionada retornamos sin realizar acción alguna
         if (!modalTaskId) {
-            console.warn('No hay tarea seleccionada para completar.');
+            console.warn(t('noTaskSelectedToComplete'));
             return;
         }
 
@@ -110,14 +102,14 @@ export const Tasks = () => {
             // Guardamos la lista actualizada en el localStorage
             saveItems(updatedList);
         } catch (error) {
-            console.error('Error al completar la tarea:', error);
+            console.error(t('errorCompletingTask'), error);
         }
     };
 
     const handleDelete = () => {
         // Si no hay tarea seleccionada retornamos sin realizar acción alguna
         if (!modalTaskId) {
-            console.warn('No hay tarea seleccionada para eliminar.');
+            console.warn(t('noTaskSelectedToDelete'));
             return;
         }
 
@@ -129,7 +121,7 @@ export const Tasks = () => {
             (tarea) => tarea.id !== modalTaskId
         );
         if (updatedList.length === currentList.length) {
-            console.warn('La tarea a eliminar no se encontró en la lista.');
+            console.warn(t('taskNotFoundToDelete'));
             return;
         }
 
@@ -137,7 +129,20 @@ export const Tasks = () => {
             setCurrentList(updatedList);
             saveItems(updatedList);
         } catch (error) {
-            console.error('Error al eliminar la tarea:', error);
+            console.error(t('errorDeletingTask'), error);
+        }
+    };
+
+    const getPriorityLabel = (priority: string) => {
+        switch (priority) {
+            case 'high':
+                return t('priorityHigh');
+            case 'medium':
+                return t('priorityMedium');
+            case 'low':
+                return t('priorityLow');
+            default:
+                return '';
         }
     };
 
@@ -153,39 +158,39 @@ export const Tasks = () => {
                         onConfirm={() => handleActions()}
                     />
 
-                    {currentSortedList.map((tarea) => {
+                    {currentSortedList.map((task) => {
                         // calcular una sola vez
                         const pctRaw = getPercentageToDeadline(
-                            tarea.timeToEnd,
-                            tarea.id
+                            task.timeToEnd,
+                            task.id
                         );
                         const pct = Math.max(0, Math.min(100, pctRaw)); // clamp 0..100
-                        const isActive = !tarea.done && pct > 0;
-                        const isOverdue = !tarea.done && pct <= 0;
+                        const isActive = !task.done && pct > 0;
+                        const isOverdue = !task.done && pct <= 0;
                         const bgClass = getBgColorForPercentage(pct);
                         const priorityClass = getClassNameForPriority(
-                            tarea.priority
+                            task.priority
                         );
 
                         return (
                             <div
-                                key={tarea.id}
-                                className={`p-2 rounded shadow-lg relative mb-2 bg-white border-b ${tarea.done ? 'border-green-500' : 'border-gray-300'}`}
+                                key={task.id}
+                                className={`p-2 rounded shadow-lg relative mb-2 bg-white border-b ${task.done ? 'border-green-500' : 'border-gray-300'}`}
                             >
                                 <h2 className='text-lg font-semibold pb-2'>
-                                    {tarea.name}
+                                    {task.name}
                                 </h2>
                                 <p className='text-sm text-gray-500 pb-2'>
-                                    {translations?.priorityLabel}{' '}
+                                    {t('priorityLabel')}{' '}
                                     <span
                                         className={`font-bold ${priorityClass}`}
                                     >
-                                        {tarea.priority}
+                                        {getPriorityLabel(task.priority)}
                                     </span>
                                 </p>
                                 <p className='text-sm text-gray-500 pb-2'>
-                                    {translations?.deadlineLabel}{' '}
-                                    {tarea.timeToEnd} minutos.
+                                    {t('deadlineLabel')} {task.timeToEnd}{' '}
+                                    {t('minutesLabel')}.
                                 </p>
 
                                 {/* Progress bar */}
@@ -204,28 +209,28 @@ export const Tasks = () => {
                                         className='mt-2 bg-gray-500 text-white py-1 px-4 rounded absolute right-5 top-7 hover:bg-green-600 cursor-pointer shadow-sm hover:px-5 transition-all duration-300'
                                         onClick={() =>
                                             handleModalComplete(
-                                                tarea.id,
-                                                tarea.name
+                                                task.id,
+                                                task.name
                                             )
                                         }
                                     >
-                                        Completar
+                                        {t('completeButton')}
                                     </button>
                                 )}
 
-                                {tarea.done && (
+                                {task.done && (
                                     <button className='mt-2 bg-green-500 text-white py-1 px-4 rounded absolute right-5 top-7 shadow-sm'>
-                                        Completada{' '}
+                                        {t('completed')}{' '}
                                         <CheckCircleIcon fontSize='small' />
                                     </button>
                                 )}
 
                                 {isOverdue && (
                                     <button
-                                        id={`deadline-${tarea.id}`}
+                                        id={`deadline-${task.id}`}
                                         className='mt-2 bg-red-600 text-white py-1 px-4 rounded absolute right-5 top-7 shadow-sm'
                                     >
-                                        Fuera de tiempo{' '}
+                                        {t('outoftime')}{' '}
                                         <HourglassEmptyIcon fontSize='small' />
                                     </button>
                                 )}
@@ -233,7 +238,7 @@ export const Tasks = () => {
                                 <CancelIcon
                                     className='absolute right-5 -top-2 cursor-pointer text-gray-600 hover:text-red-600 filter drop-shadow-md'
                                     onClick={() => {
-                                        handleModalDelete(tarea.id, tarea.name);
+                                        handleModalDelete(task.id, task.name);
                                     }}
                                 />
                             </div>
@@ -243,7 +248,7 @@ export const Tasks = () => {
                     {currentList.length === 0 && (
                         <p className='text-center text-gray-500 mt-10'>
                             <FormatListBulletedIcon fontSize='small' />{' '}
-                            {translations?.noTasks}
+                            {t('noTasks')}
                         </p>
                     )}
                 </div>

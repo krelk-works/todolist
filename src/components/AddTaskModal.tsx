@@ -1,28 +1,8 @@
 // AddTaskModal.tsx
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { AddTaskModalProps } from '@/types/AddModal';
-import type { Priority } from '@/types/Tareas';
-
-const DURATION_OPTIONS: { label: string; value: number }[] = [
-    { label: '5 min', value: 5 },
-    { label: '10 min', value: 10 },
-    { label: '20 min', value: 20 },
-    { label: '30 min', value: 30 },
-    { label: '40 min', value: 40 },
-    { label: '50 min', value: 50 },
-    { label: '1 hora', value: 60 },
-    { label: '2 horas', value: 120 },
-    { label: '3 horas', value: 180 },
-    { label: '4 horas', value: 240 },
-    { label: '5 horas', value: 300 },
-    { label: '6 horas', value: 360 },
-    { label: '7 horas', value: 420 },
-    { label: '8 horas', value: 480 },
-    { label: '9 horas', value: 540 },
-    { label: '10 horas', value: 600 },
-    { label: '11 horas', value: 660 },
-    { label: '12 horas', value: 720 },
-];
+import type { Priority } from '@/types/Task';
 
 export default function AddTaskModal({
     isOpen,
@@ -33,6 +13,30 @@ export default function AddTaskModal({
     const [durationMin, setDurationMin] = useState<number>(30);
     const [priority, setPriority] = useState<Priority>('low');
     const titleRef = useRef<HTMLInputElement>(null);
+
+    // Translations for labels
+    const { t } = useTranslation();
+
+    const DURATION_OPTIONS: { label: string; value: number }[] = [
+        { label: `5 ${t('minutesLabel')}`, value: 5 },
+        { label: `10 ${t('minutesLabel')}`, value: 10 },
+        { label: `20 ${t('minutesLabel')}`, value: 20 },
+        { label: `30 ${t('minutesLabel')}`, value: 30 },
+        { label: `40 ${t('minutesLabel')}`, value: 40 },
+        { label: `50 ${t('minutesLabel')}`, value: 50 },
+        { label: `1 ${t('hourLabel')}`, value: 60 },
+        { label: `2 ${t('hoursLabel')}`, value: 120 },
+        { label: `3 ${t('hoursLabel')}`, value: 180 },
+        { label: `4 ${t('hoursLabel')}`, value: 240 },
+        { label: `5 ${t('hoursLabel')}`, value: 300 },
+        { label: `6 ${t('hoursLabel')}`, value: 360 },
+        { label: `7 ${t('hoursLabel')}`, value: 420 },
+        { label: `8 ${t('hoursLabel')}`, value: 480 },
+        { label: `9 ${t('hoursLabel')}`, value: 540 },
+        { label: `10 ${t('hoursLabel')}`, value: 600 },
+        { label: `11 ${t('hoursLabel')}`, value: 660 },
+        { label: `12 ${t('hoursLabel')}`, value: 720 },
+    ];
 
     // Resetea y enfoca al abrir
     useEffect(() => {
@@ -82,7 +86,7 @@ export default function AddTaskModal({
                 onClick={stop}
             >
                 <h3 id='add-task-title' className='text-xl font-bold mb-4'>
-                    Agregar una nueva tarea
+                    {t('addTask')}
                 </h3>
 
                 <form onSubmit={handleSubmit} className='space-y-4'>
@@ -92,7 +96,7 @@ export default function AddTaskModal({
                             htmlFor='task-title'
                             className='block text-sm font-medium text-gray-700 mb-1'
                         >
-                            Título
+                            {t('titlePlaceholder')}
                         </label>
                         <input
                             id='task-title'
@@ -100,7 +104,7 @@ export default function AddTaskModal({
                             type='text'
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder='Ej. Preparar presentación'
+                            placeholder={t('titlePlaceholder')}
                             className='w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-800'
                         />
                     </div>
@@ -111,7 +115,7 @@ export default function AddTaskModal({
                             htmlFor='task-duration'
                             className='block text-sm font-medium text-gray-700 mb-1'
                         >
-                            Duración
+                            {t('durationPlaceholder')}
                         </label>
                         <select
                             id='task-duration'
@@ -127,9 +131,6 @@ export default function AddTaskModal({
                                 </option>
                             ))}
                         </select>
-                        <p className='mt-1 text-xs text-gray-500'>
-                            Valor enviado en minutos.
-                        </p>
                     </div>
 
                     {/* Prioridad */}
@@ -138,7 +139,7 @@ export default function AddTaskModal({
                             htmlFor='task-priority'
                             className='block text-sm font-medium text-gray-700 mb-1'
                         >
-                            Prioridad
+                            {t('priorityLabel')}
                         </label>
                         <select
                             id='task-priority'
@@ -148,9 +149,11 @@ export default function AddTaskModal({
                             }
                             className='w-full rounded border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-gray-800'
                         >
-                            <option value='high'>Alta</option>
-                            <option value='medium'>Media</option>
-                            <option value='low'>Baja</option>
+                            <option value='high'>{t('priorityHigh')}</option>
+                            <option value='medium'>
+                                {t('priorityMedium')}
+                            </option>
+                            <option value='low'>{t('priorityLow')}</option>
                         </select>
                     </div>
 
@@ -161,7 +164,7 @@ export default function AddTaskModal({
                             onClick={onClose}
                             className='px-4 py-2 rounded border bg-gray-100 hover:bg-gray-200 text-gray-800 transition-colors'
                         >
-                            Cancelar
+                            {t('cancelButton')}
                         </button>
                         <button
                             type='submit'
@@ -169,7 +172,7 @@ export default function AddTaskModal({
                             className={`px-4 py-2 rounded text-white transition-colors
                          ${canSubmit ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-400 cursor-not-allowed'}`}
                         >
-                            Añadir
+                            {t('addButton')}
                         </button>
                     </div>
                 </form>

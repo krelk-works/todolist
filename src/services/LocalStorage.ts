@@ -1,17 +1,17 @@
 // Importamos los tipos necesarios
-import type { Tarea } from '../types/Tareas';
+import type { Task } from '../types/Task';
 
 // Aqui definiremos las funciones para interactuar con el localStorage
 const STORAGE_KEY = 'todo-list-items';
 
 // Get items from localStorage
-export const getItems = (): Tarea[] => {
+export const getItems = (): Task[] => {
     const items = localStorage.getItem(STORAGE_KEY);
     return items ? JSON.parse(items) : [];
 };
 
 // Save items to localStorage
-export const saveItems = (items: Tarea[]) => {
+export const saveItems = (items: Task[]) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 };
 
@@ -38,7 +38,7 @@ export const deleteItem = (id: number) => {
 };
 
 // Add a new item to localStorage
-export const addItem = (newItem: Tarea) => {
+export const addItem = (newItem: Task) => {
     const items = getItems();
     items.push(newItem);
     saveItems(items);

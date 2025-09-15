@@ -1,4 +1,4 @@
-import type { Priority } from '../types/Tareas';
+import type { Priority } from './Task';
 
 export type AddTaskPayload = {
     title: string;

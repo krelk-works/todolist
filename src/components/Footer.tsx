@@ -1,14 +1,12 @@
-// import React from 'react'
-import { getTranslation } from '@/utils/translations';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
-    const translations = getTranslation();
+    const { t } = useTranslation();
     return (
         <div>
             <footer className='bg-blue-600 text-white p-4 text-center shadow-md mt-4'>
                 <p className='text-sm'>
-                    &copy; 2025 {translations.appTitle} by krelk.{' '}
-                    {translations.reservedRights}
+                    &copy; 2025 {t('appTitle')} by krelk. {t('reservedRights')}
                 </p>
             </footer>
         </div>

@@ -1,24 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ModalProps } from '@/types/Modal';
-import type { Translation } from '@/types/Translation';
-import { getTranslation } from '@/utils/translations';
 
 export const Modal = (props: ModalProps) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [type, setType] = React.useState<'complete' | 'delete'>('complete');
-    const [translations, setTranslations] = React.useState<Translation>();
+    const { t } = useTranslation();
 
     // Sincroniza el estado interno con las props
     React.useEffect(() => {
         setIsOpen(props.isOpen);
         setType(props.type);
     }, [props.isOpen, props.type]);
-
-    // Carga las traducciones al montar el componente
-    React.useEffect(() => {
-        const loadedTranslations = getTranslation();
-        setTranslations(loadedTranslations);
-    }, []);
 
     const onClose = () => {
         props.onClose();
@@ -35,26 +28,25 @@ export const Modal = (props: ModalProps) => {
             <div className='bg-white p-4 rounded shadow-md max-w-[90%]'>
                 <h2 className='text-lg font-bold border-b border-gray-300 text-center pb-4'>
                     {type === 'complete'
-                        ? translations?.modalCompleteTitle
-                        : translations?.modalDeleteTitle}
+                        ? t('modalCompleteTitle')
+                        : t('modalDeleteTitle')}
                 </h2>
                 <p className='text-center py-2 text-sm text-gray-600 border-b border-gray-300'>
                     {' '}
-                    {translations?.task}:{' '}
-                    <span className='font-bold'>{props.name}</span>
+                    {t('task')}: <span className='font-bold'>{props.name}</span>
                 </p>
                 <div className='flex justify-center items-center pt-4'>
                     <button
                         className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-2 rounded mr-2 cursor-pointer transition-colors duration-300 w-16'
                         onClick={onClose}
                     >
-                        {translations?.no}
+                        {t('no')}
                     </button>
                     <button
                         className='bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-2 rounded cursor-pointer transition-colors duration-300 w-16'
                         onClick={onConfirm}
                     >
-                        {translations?.yes}
+                        {t('yes')}
                     </button>
                 </div>
             </div>
