@@ -26,6 +26,7 @@ const spanish = {
     yes: "Sí",
     no: "No",
     task: "Tarea",
+    reservedRights: "Todos los derechos reservados.",
 }
 
 const english = {
@@ -60,6 +61,7 @@ const english = {
     errorDeletingTask: "Error deleting task",
     errorCompletingTask: "Error completing task",
     errorEditingTask: "Error editing task",
+    reservedRights: "All rights reserved.",
 }
 
 const romanian = {
@@ -90,6 +92,7 @@ const romanian = {
     yes: "Da",
     no: "Nu",
     task: "Sarcină",
+    reservedRights: "Toate drepturile rezervate.",
 }
 
 const french = {
@@ -120,6 +123,7 @@ const french = {
     yes: "Oui",
     no: "Non",
     task: "Tâche",
+    reservedRights: "Tous droits réservés.",
 }
 
 const italian = {
@@ -150,6 +154,7 @@ const italian = {
     yes: "Sì",
     no: "No",
     task: "Attività",
+    reservedRights: "Tutti i diritti riservati.",
 }
 
 const german = {
@@ -180,6 +185,7 @@ const german = {
     yes: "Ja",
     no: "Nein",
     task: "Aufgabe",
+    reservedRights: "Alle Rechte vorbehalten.",
 }
 
 const portuguese = {
@@ -210,6 +216,7 @@ const portuguese = {
     yes: "Sim",
     no: "Não",
     task: "Tarefa",
+    reservedRights: "Todos os direitos reservados.",
 }
 
 const bulgarian = {
@@ -240,6 +247,7 @@ const bulgarian = {
     yes: "Да",
     no: "Не",
     task: "Задача",
+    reservedRights: "Всички права запазени.",
 }
 
 const turkish = {
@@ -270,6 +278,7 @@ const turkish = {
     yes: "Evet",
     no: "Hayır",
     task: "Görev",
+    reservedRights: "Tüm hakları saklıdır.",
 }
 
 export const getTranslation = () => {
