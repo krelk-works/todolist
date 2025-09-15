@@ -284,6 +284,8 @@ export const getTranslation = () => {
             return romanian;
         case 'fr-FR':
             return french;
+        case 'it-IT':
+            return italian;
         case 'de-DE':
             return german;
         case 'pt-PT':
