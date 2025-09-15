@@ -15,7 +15,7 @@ Autodetección de idioma (ES/EN).
 ## Features
 - Tareas con deadline ⏳
 - Prioridades (Alta/Media/Baja)
-- Traducción automática (ES/EN)
+- Traducción automática (ES/EN/IT/FR/PT/TR/RO/BG/DE)
 
 ## Stack
 React + TypeScript + Vite + Tailwind
@@ -37,4 +37,4 @@ npx cap open android
 ```
 
 ## Versión
-0.0.2
+0.0.5
