@@ -44,4 +44,4 @@ npx cap open android
 
 ## Versión
 
-0.1.3
+0.1.4
