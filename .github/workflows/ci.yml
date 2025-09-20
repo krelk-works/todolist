@@ -27,8 +27,8 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Add custom domain
-        run: echo "krelk.com" > dist/CNAME
+      # - name: Add custom domain
+      #   run: echo "krelk.com" > dist/CNAME
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
