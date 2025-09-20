@@ -556,8 +556,7 @@ i18n
                     hoursLabel: 'часы',
                     noTaskSelectedToComplete:
                         'Не выбрана задача для завершения.',
-                    noTaskSelectedToDelete:
-                        'Не выбрана задача для удаления',
+                    noTaskSelectedToDelete: 'Не выбрана задача для удаления',
                     taskNotFoundToDelete:
                         'Задача для удаления не найдена в списке.',
                     errorDeletingTask: 'Ошибка при удалении задачи',
@@ -600,8 +599,7 @@ i18n
                     hoursLabel: 'години',
                     noTaskSelectedToComplete:
                         'Не вибрано справу для завершення.',
-                    noTaskSelectedToDelete:
-                        'Не вибрано справу для видалення',
+                    noTaskSelectedToDelete: 'Не вибрано справу для видалення',
                     taskNotFoundToDelete:
                         'Справу для видалення не знайдено у списку.',
                     errorDeletingTask: 'Помилка при видаленні справи',

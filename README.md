@@ -34,7 +34,7 @@ npm run dev
 ## Android APK
 
 ```bash
-npm i @capacitor/core @capacitor/cli
+npm i @capacitor/core @capacitor/cli @capacitor/android
 npx cap init TODO-APP com.tuempresa.todo
 npm run build
 npx cap add android

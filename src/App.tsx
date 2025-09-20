@@ -1,13 +1,13 @@
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Tasks } from '@/components/Tasks';
-import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 export const App = () => {
     // Hook de i18n
     const { i18n } = useTranslation();
-    
+
     // Automáticamente se cambia el idioma del navegador / móvil
     useEffect(() => {
         const userLang = navigator.language || (navigator as any).userLanguage; // 'en-US', 'es-ES', etc.
